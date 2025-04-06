@@ -1,109 +1,199 @@
-import { StyleSheet, Image, Platform } from 'react-native';
+import {
+  StyleSheet,
+  ScrollView,
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  FlatList,
+} from "react-native";
+import { Text as Text2 } from "react-native-paper";
+import { TopBar } from ".";
 
-import { Collapsible } from '@/components/Collapsible';
-import { ExternalLink } from '@/components/ExternalLink';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-import { IconSymbol } from '@/components/ui/IconSymbol';
+const data = [
+  {
+    id: 1,
+    position: "UX/UI дизайнер",
+    image: "",
+  },
+  {
+    id: 2,
+    position: "UX/UI дизайнер",
+    image: "",
+  },
+  {
+    id: 3,
+    position: "UX/UI дизайнер",
+    image: "",
+  },
+  {
+    id: 4,
+    position: "UX/UI дизайнер",
+    image: "",
+  },
+  {
+    id: 5,
+    position: "UX/UI дизайнер",
+    image: "",
+  },
+  {
+    id: 6,
+    position: "UX/UI дизайнер",
+    image: "",
+  },
+  {
+    id: 7,
+    position: "UX/UI дизайнер",
+    image: "",
+  },
+  {
+    id: 8,
+    position: "UX/UI дизайнер",
+    image: "",
+  },
+  {
+    id: 9,
+    position: "UX/UI дизайнер",
+    image: "",
+  },
+  {
+    id: 10,
+    position: "UX/UI дизайнер",
+    image: "",
+  },
+];
+
+const ExploreCard = ({ item }: any) => (
+  <View style={styles.card}>
+    <View style={styles.title}>
+      <Text style={[styles.textColor, styles.titleText]}>{item.position}</Text>
+    </View>
+    <View style={styles.image}>
+      <View style={styles.imageInner}>
+        <Image
+          style={{ height: 164, width: 155, borderRadius: 20 }}
+          source={require(`@/assets/images/home/bg2.png`)}
+          alt="progect-image"
+        />
+      </View>
+    </View>
+    <View style={styles.bottom}>
+      <View style={styles.bottomInneContainer}>
+        <View style={styles.bottomInner1}>
+          <Text style={[styles.textColor, styles.bottomText]}>Марк Исаев</Text>
+          <View style={styles.indicator}></View>
+        </View>
+        <TouchableOpacity style={styles.button}>
+          <Text style={[styles.textColor,{fontSize:10}]}>Написать автору</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  </View>
+);
 
 export default function TabTwoScreen() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
-      headerImage={
-        <IconSymbol
-          size={310}
-          color="#808080"
-          name="chevron.left.forwardslash.chevron.right"
-          style={styles.headerImage}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Explore</ThemedText>
-      </ThemedView>
-      <ThemedText>This app includes example code to help you get started.</ThemedText>
-      <Collapsible title="File-based routing">
-        <ThemedText>
-          This app has two screens:{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/explore.tsx</ThemedText>
-        </ThemedText>
-        <ThemedText>
-          The layout file in <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText>{' '}
-          sets up the tab navigator.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/router/introduction">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Android, iOS, and web support">
-        <ThemedText>
-          You can open this project on Android, iOS, and the web. To open the web version, press{' '}
-          <ThemedText type="defaultSemiBold">w</ThemedText> in the terminal running this project.
-        </ThemedText>
-      </Collapsible>
-      <Collapsible title="Images">
-        <ThemedText>
-          For static images, you can use the <ThemedText type="defaultSemiBold">@2x</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">@3x</ThemedText> suffixes to provide files for
-          different screen densities
-        </ThemedText>
-        <Image source={require('@/assets/images/react-logo.png')} style={{ alignSelf: 'center' }} />
-        <ExternalLink href="https://reactnative.dev/docs/images">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Custom fonts">
-        <ThemedText>
-          Open <ThemedText type="defaultSemiBold">app/_layout.tsx</ThemedText> to see how to load{' '}
-          <ThemedText style={{ fontFamily: 'SpaceMono' }}>
-            custom fonts such as this one.
-          </ThemedText>
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/versions/latest/sdk/font">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Light and dark mode components">
-        <ThemedText>
-          This template has light and dark mode support. The{' '}
-          <ThemedText type="defaultSemiBold">useColorScheme()</ThemedText> hook lets you inspect
-          what the user's current color scheme is, and so you can adjust UI colors accordingly.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Animations">
-        <ThemedText>
-          This template includes an example of an animated component. The{' '}
-          <ThemedText type="defaultSemiBold">components/HelloWave.tsx</ThemedText> component uses
-          the powerful <ThemedText type="defaultSemiBold">react-native-reanimated</ThemedText>{' '}
-          library to create a waving hand animation.
-        </ThemedText>
-        {Platform.select({
-          ios: (
-            <ThemedText>
-              The <ThemedText type="defaultSemiBold">components/ParallaxScrollView.tsx</ThemedText>{' '}
-              component provides a parallax effect for the header image.
-            </ThemedText>
-          ),
-        })}
-      </Collapsible>
-    </ParallaxScrollView>
+    <ScrollView style={styles.container}>
+      <View>
+        <TopBar />
+      </View>
+      <View style={styles.titleContainer}>
+        <Text2 style={{ color: "white", fontSize: 20 }}>
+          Поиск исполнителя
+        </Text2>
+      </View>
+      <FlatList
+        style={styles.cardContainer}
+        scrollEnabled={false}
+        ItemSeparatorComponent={() => <View style={{ height: 16 }} />}
+        data={data}
+        renderItem={ExploreCard}
+        keyExtractor={(item: any) => item.id}
+        numColumns={2}
+        columnWrapperStyle={{ justifyContent: "space-around" }}
+      />
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  headerImage: {
-    color: '#808080',
-    bottom: -90,
-    left: -35,
-    position: 'absolute',
+  container: {
+    backgroundColor: "#232323",
   },
   titleContainer: {
-    flexDirection: 'row',
-    gap: 8,
+    paddingHorizontal: 15,
+  },
+  cardContainer: {
+    paddingHorizontal: 15,
+    marginTop: 15,
+    
+  },
+  card: {
+    height: 231,
+    width: 163,
+    backgroundColor: "rgba(54, 54, 54, 1)",
+    position: "relative",
+    borderRadius: 22,
+  },
+  title: {
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+  image: {
+    position: "absolute",
+    width: "100%",
+  },
+  bottom: {
+    position: "absolute",
+    top: 165,
+    width: "100%",
+    height: 55,
+  },
+  textColor: {
+    color: "white",
+  },
+  titleText: {
+    fontSize: 10,
+    backgroundColor: "#232323",
+    textAlign: "center",
+    height: 28,
+    width: 109,
+    top: -10,
+    paddingTop: 12,
+    borderRadius: 14,
+    zIndex: 2,
+  },
+  imageInner: {
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+  bottomInner1: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    columnGap: 4,
+  },
+  bottomText: {
+    fontSize: 14,
+  },
+  indicator: {
+    backgroundColor: "rgba(19, 227, 152, 1)",
+    height: 6,
+    width: 6,
+    borderRadius: 3,
+  },
+  bottomInneContainer: {
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "space-around",
+    height: "100%",
+  },
+  button: {
+    width: 111,
+    height: 22,
+    backgroundColor: "rgba(255, 159, 247, 1)",
+    alignItems: "center",
+    borderRadius: 11,
+    justifyContent:"center"
   },
 });
